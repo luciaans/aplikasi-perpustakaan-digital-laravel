@@ -1,4 +1,4 @@
-# Aplikasi Perpustakaan Digital Backend Laravel
+# Aplikasi Perpustakaan Digital Backend - Laravel
 
 ## Informasi Mahasiswa
 - **Nama**: Sayyid M Rizqi R Al Qadrie
