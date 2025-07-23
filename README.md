@@ -252,4 +252,3 @@ Proyek ini dibuat untuk keperluan akademik di Universitas Muhammadiyah Pontianak
 
 ---
 
-**Catatan**: Pastikan untuk selalu melakukan backup database sebelum melakukan perubahan besar pada aplikasi.
