@@ -1,315 +1,255 @@
-# 📚 Aplikasi Perpustakaan Laravel
+# Aplikasi Perpustakaan Digital API
 
-Sistem manajemen perpustakaan digital yang dibangun menggunakan Laravel untuk mengelola koleksi buku, anggota, dan transaksi peminjaman.
+## Informasi Mahasiswa
+- **Nama**: Sayyid M Rizqi R Al Qadrie
+- **NIM**: 221220049
+- **Universitas**: Universitas Muhammadiyah Pontianak
 
-## ✨ Fitur Utama
+## Deskripsi Proyek
 
-- **Manajemen Buku**: CRUD buku dengan kategori, pengarang, dan penerbit
-- **Manajemen Anggota**: Registrasi dan pengelolaan data anggota perpustakaan
-- **Sistem Peminjaman**: Peminjaman dan pengembalian buku dengan tracking status
-- **Dashboard Admin**: Panel kontrol untuk admin dengan statistik dan laporan
-- **Sistem Denda**: Perhitungan otomatis denda keterlambatan
-- **Pencarian & Filter**: Fitur pencarian buku berdasarkan judul, pengarang, atau kategori
-- **Laporan**: Generate laporan peminjaman dan statistik perpustakaan
-- **Notifikasi**: Reminder untuk pengembalian buku
+Aplikasi Perpustakaan Digital API adalah sebuah layanan backend yang menyediakan kumpulan API untuk mendukung sistem perpustakaan digital. Aplikasi ini dirancang untuk mengelola data buku, pengguna, peminjaman, dan fungsi-fungsi lain yang dibutuhkan dalam sistem perpustakaan secara efisien dan terstruktur.
 
-## 🛠️ Teknologi yang Digunakan
+### Keunggulan
+- Menggunakan **ULID (Universally Unique Lexicographically Sortable Identifier)** sebagai pengganti UUID untuk memberikan identifikasi unik yang lebih terstruktur dan dapat diurutkan secara kronologis
+- API yang modular dan mudah diintegrasikan
+- Mendukung pengembangan aplikasi web dan mobile berbasis perpustakaan
+- Struktur data yang efisien dan terorganisir
 
-- **Backend**: Laravel 10.x
-- **Database**: MySQL 8.0+
-- **Frontend**: Blade Template, Bootstrap 5
-- **Authentication**: Laravel Sanctum
-- **PDF Generator**: DomPDF
-- **Image Upload**: Laravel Storage
-- **Icons**: Font Awesome
+## Fitur Utama
 
-## 📋 Prasyarat
+### 1. Manajemen Pengguna (Users)
+- Melihat semua pengguna
+- Membuat pengguna baru
+- Melihat detail pengguna berdasarkan ID
+- Mengupdate data pengguna
+- Menghapus pengguna
 
-Pastikan sistem Anda memiliki:
+### 2. Manajemen Penulis (Authors)
+- Melihat semua penulis
+- Menambah penulis baru
+- Melihat detail penulis berdasarkan ID
+- Mengupdate data penulis
+- Menghapus penulis
+
+### 3. Manajemen Buku (Books)
+- Melihat semua buku
+- Menambah buku baru
+- Melihat detail buku berdasarkan ID
+- Mengupdate data buku
+- Menghapus buku
+- Relasi many-to-many dengan penulis
+
+### 4. Manajemen Peminjaman (Loans)
+- Melihat semua peminjaman
+- Membuat peminjaman baru
+- Melihat detail peminjaman berdasarkan ID
+- Mengembalikan buku
+- Menghapus data peminjaman
+
+## Teknologi yang Digunakan
+
+- **Framework**: Laravel
+- **Database**: MySQL/PostgreSQL
+- **Identifier**: ULID (Universally Unique Lexicographically Sortable Identifier)
+- **Testing**: Postman Collection
+
+## Persyaratan Sistem
 
 - PHP >= 8.1
 - Composer
-- Node.js & NPM
-- MySQL >= 8.0
-- Web Server (Apache/Nginx)
+- Laravel >= 10.x
+- MySQL >= 8.0 atau PostgreSQL >= 13
+- Node.js & NPM (untuk asset compilation)
 
-## 🚀 Instalasi
+## Instalasi
 
 ### 1. Clone Repository
-
 ```bash
-git clone https://github.com/username/perpustakaan-laravel.git
-cd perpustakaan-laravel
+git clone https://github.com/username/aplikasi-perpustakaan-digital.git
+cd aplikasi-perpustakaan-digital
 ```
 
 ### 2. Install Dependencies
-
 ```bash
-# Install PHP dependencies
 composer install
-
-# Install JavaScript dependencies
 npm install
 ```
 
-### 3. Konfigurasi Environment
-
+### 3. Setup Environment
 ```bash
-# Copy file environment
 cp .env.example .env
-
-# Generate application key
 php artisan key:generate
 ```
 
 ### 4. Konfigurasi Database
-
 Edit file `.env` dan sesuaikan konfigurasi database:
-
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=perpustakaan_db
+DB_DATABASE=perpustakaan_digital
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
 
 ### 5. Migrasi Database
-
 ```bash
-# Jalankan migrasi
 php artisan migrate
-
-# Jalankan seeder (opsional)
 php artisan db:seed
 ```
 
-### 6. Build Assets
-
+### 6. Jalankan Aplikasi
 ```bash
-# Compile assets
-npm run build
-
-# Atau untuk development
-npm run dev
-```
-
-### 7. Storage Link
-
-```bash
-# Buat symbolic link untuk storage
-php artisan storage:link
-```
-
-### 8. Jalankan Aplikasi
-
-```bash
-# Development server
 php artisan serve
 ```
 
 Aplikasi akan berjalan di `http://localhost:8000`
 
-## 👤 Akun Default
+## API Endpoints
 
-Setelah menjalankan seeder, gunakan akun berikut:
-
-**Admin:**
-- Email: `admin@perpustakaan.com`
-- Password: `password`
-
-**User:**
-- Email: `user@perpustakaan.com`
-- Password: `password`
-
-## 📁 Struktur Project
-
+### Base URL
 ```
-perpustakaan-laravel/
-├── app/
-│   ├── Http/Controllers/
-│   │   ├── Admin/
-│   │   ├── Auth/
-│   │   └── User/
-│   ├── Models/
-│   └── Services/
-├── database/
-│   ├── migrations/
-│   ├── seeders/
-│   └── factories/
-├── resources/
-│   ├── views/
-│   │   ├── admin/
-│   │   ├── auth/
-│   │   └── layouts/
-│   └── js/
-├── routes/
-│   ├── web.php
-│   └── api.php
-└── public/
-    ├── css/
-    ├── js/
-    └── images/
+http://localhost:8000/api
 ```
 
-## 🗄️ Database Schema
+### Users
+- `GET /users` - Mendapatkan semua pengguna
+- `POST /users` - Membuat pengguna baru
+- `GET /users/{id}` - Mendapatkan pengguna berdasarkan ID
+- `PUT /users/{id}` - Mengupdate pengguna
+- `DELETE /users/{id}` - Menghapus pengguna
 
-### Tabel Utama
-
-- `users` - Data pengguna (admin & anggota)
-- `books` - Data buku
-- `categories` - Kategori buku
-- `authors` - Data pengarang
-- `publishers` - Data penerbit
-- `borrowings` - Transaksi peminjaman
-- `fines` - Data denda
-
-### Relasi Database
-
-- Book belongsTo Category, Author, Publisher
-- Borrowing belongsTo User, Book
-- Fine belongsTo Borrowing
-
-## 🔧 Konfigurasi Tambahan
-
-### Mail Configuration
-
-Untuk fitur notifikasi email, konfigurasi SMTP di `.env`:
-
-```env
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.gmail.com
-MAIL_PORT=587
-MAIL_USERNAME=your_email@gmail.com
-MAIL_PASSWORD=your_password
-MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=your_email@gmail.com
-MAIL_FROM_NAME="Perpustakaan App"
-```
-
-### File Upload Configuration
-
-Sesuaikan ukuran maksimal upload di `config/filesystems.php`:
-
-```php
-'max_file_size' => 2048, // 2MB
-'allowed_extensions' => ['jpg', 'jpeg', 'png', 'pdf'],
-```
-
-## 📊 API Endpoints
-
-### Authentication
-- `POST /api/login` - Login
-- `POST /api/logout` - Logout
-- `POST /api/register` - Register anggota
+### Authors
+- `GET /authors` - Mendapatkan semua penulis
+- `POST /authors` - Membuat penulis baru
+- `GET /authors/{id}` - Mendapatkan penulis berdasarkan ID
+- `PUT /authors/{id}` - Mengupdate penulis
+- `DELETE /authors/{id}` - Menghapus penulis
 
 ### Books
-- `GET /api/books` - List semua buku
-- `GET /api/books/{id}` - Detail buku
-- `POST /api/books` - Tambah buku (Admin)
-- `PUT /api/books/{id}` - Update buku (Admin)
-- `DELETE /api/books/{id}` - Hapus buku (Admin)
+- `GET /books` - Mendapatkan semua buku
+- `POST /books` - Membuat buku baru
+- `GET /books/{id}` - Mendapatkan buku berdasarkan ID
+- `PUT /books/{id}` - Mengupdate buku
+- `DELETE /books/{id}` - Menghapus buku
 
-### Borrowings
-- `GET /api/borrowings` - List peminjaman user
-- `POST /api/borrowings` - Pinjam buku
-- `PUT /api/borrowings/{id}/return` - Kembalikan buku
+### Loans
+- `GET /loans` - Mendapatkan semua peminjaman
+- `POST /loans` - Membuat peminjaman baru
+- `GET /loans/{id}` - Mendapatkan peminjaman berdasarkan ID
+- `PATCH /loans/{id}/return` - Mengembalikan buku
+- `DELETE /loans/{id}` - Menghapus peminjaman
 
-## 🧪 Testing
+## Contoh Request
 
-```bash
-# Jalankan semua tests
-php artisan test
+### Membuat User Baru
+```json
+POST /api/users
+Content-Type: application/json
 
-# Test dengan coverage
-php artisan test --coverage
-
-# Test spesifik feature
-php artisan test --filter=BookTest
+{
+    "name": "Ahmad Santosa",
+    "email": "ahmad@example.com",
+    "password": "password123",
+    "membership_date": "2024-01-01"
+}
 ```
 
-## 🚀 Deployment
+### Membuat Penulis Baru
+```json
+POST /api/authors
+Content-Type: application/json
 
-### Shared Hosting
-
-1. Upload semua file ke public_html
-2. Pindahkan isi folder `public` ke root public_html
-3. Edit `index.php` sesuaikan path
-4. Set permission folder `storage` dan `bootstrap/cache` ke 755
-5. Import database
-6. Konfigurasi `.env` untuk production
-
-### VPS/Cloud Server
-
-```bash
-# Set permission
-sudo chown -R www-data:www-data storage bootstrap/cache
-sudo chmod -R 775 storage bootstrap/cache
-
-# Optimize untuk production
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+{
+    "name": "Tere Liye",
+    "nationality": "Indonesian",
+    "birthdate": "1979-05-21"
+}
 ```
 
-## 🔒 Keamanan
+### Membuat Buku Baru
+```json
+POST /api/books
+Content-Type: application/json
 
-- Validasi input pada semua form
-- CSRF protection
-- SQL injection prevention menggunakan Eloquent ORM
-- XSS protection dengan Blade templating
-- Authentication middleware
-- File upload validation
+{
+    "title": "Bumi",
+    "isbn": "978-6020331775",
+    "publisher": "Gramedia Pustaka Utama",
+    "year_published": "2014",
+    "stock": 5,
+    "author_ids": ["01HXX4EXAMPLE"]
+}
+```
 
-## 🤝 Kontribusi
+### Membuat Peminjaman Baru
+```json
+POST /api/loans
+Content-Type: application/json
 
-Kami menyambut kontribusi dari developer lain:
+{
+    "user_id": "01HXX4EXAMPLE",
+    "book_id": "01HXX4EXAMPLE", 
+    "loan_date": "2024-01-20",
+    "due_date": "2024-02-03"
+}
+```
 
-1. Fork repository ini
-2. Buat branch fitur (`git checkout -b feature/fitur-baru`)
-3. Commit perubahan (`git commit -am 'Tambah fitur baru'`)
-4. Push ke branch (`git push origin feature/fitur-baru`)
-5. Buat Pull Request
+## Testing
 
-## 📝 Changelog
+Untuk testing API, gunakan Postman Collection yang telah disediakan:
+1. Import file `Aplikasi Perpustakaan Digital API.postman_collection.json`
+2. Set base URL ke `http://localhost:8000/api`
+3. Jalankan requests sesuai kebutuhan
 
-### v1.0.0 (2024-01-15)
-- Rilis awal aplikasi
-- CRUD buku, anggota, peminjaman
-- Dashboard admin
-- Sistem denda
+## Struktur Database
 
-### v1.1.0 (2024-02-01)
-- Tambah fitur notifikasi email
-- Export laporan PDF
-- Optimasi performance
+### Tabel Users
+- id (ULID)
+- name
+- email
+- password
+- membership_date
+- timestamps
 
-## 🐛 Bug Reports
+### Tabel Authors
+- id (ULID)
+- name
+- nationality
+- birthdate
+- timestamps
 
-Jika menemukan bug, silakan buat issue di GitHub dengan detail:
-- Langkah untuk reproduce bug
-- Screenshot (jika ada)
-- Environment details
-- Error logs
+### Tabel Books
+- id (ULID)
+- title
+- isbn
+- publisher
+- year_published
+- stock
+- timestamps
 
-## 📄 Lisensi
+### Tabel Loans
+- id (ULID)
+- user_id (foreign key)
+- book_id (foreign key)
+- loan_date
+- due_date
+- return_date (nullable)
+- timestamps
 
-Aplikasi ini menggunakan [MIT License](https://opensource.org/licenses/MIT).
+### Tabel Book_Author (Pivot Table)
+- book_id (foreign key)
+- author_id (foreign key)
 
-## 📞 Kontak
+## Kontribusi
 
-- Developer: [Nama Developer]
-- Email: developer@email.com
-- GitHub: [@username](https://github.com/username)
+Proyek ini dikembangkan sebagai tugas kuliah. Jika ada saran atau perbaikan, silakan buat issue atau pull request.
 
-## 🙏 Acknowledgments
+## Lisensi
 
-- Laravel Framework Team
-- Bootstrap Team
-- Font Awesome
-- Komunitas PHP Indonesia
+Proyek ini dibuat untuk keperluan akademik di Universitas Muhammadiyah Pontianak.
+
 
 ---
 
-**⭐ Jika project ini membantu, jangan lupa berikan star di GitHub!**
+**Catatan**: Pastikan untuk selalu melakukan backup database sebelum melakukan perubahan besar pada aplikasi.
